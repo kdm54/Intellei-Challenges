@@ -19,7 +19,9 @@ service: serverless-dogs # NOTE: update this with your service name
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
+  stage: serverless-dogs
+  region: us-east-1
 
 # you can overwrite defaults here
 #  stage: dev
