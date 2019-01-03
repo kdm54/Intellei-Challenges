@@ -16,14 +16,30 @@ async function getBreedCount() {
           count[breed] = allBreeds[breed].length;
         }
     }
-    //returns number of subBreeds for each Breed
+    //returns number of subBreeds for each Breed (count of the array above)
     return count;
 }
 
 
 // Get a picture of sub-breed. Ex: 'basset'
 async function getRandomImageOfSubBreed(subBreed) {
-  //starting next;
+  const response = await axios.get('https://dog.ceo/api/breeds/list/all');
+    if (response.data.message){
+      var dog = "";
+      var allBreeds = response.data.message;
+      //for each breed of dog:
+      for (var breed in allBreeds){
+        //if the index of that specific breed has a subBreed:
+        //(it's subBreed count must be greater than 0 for it to have a subBreed)
+        if (allBreeds[breed].indexOf(subBreed) >= 0){
+          dog = breed;
+          //got URL from the dog API random generator section
+          var random = await axios.get('https://dog.ceo/api/breed/' + dog + '/' + subBreed + '/images/random');
+          //returns value of random
+          return random.data.message;
+        }
+      }
+    }
 }
 
 // NO NEED TO MODIFY ANY LINES BELOW THIS POINT
