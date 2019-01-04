@@ -1,19 +1,18 @@
 'use strict';
 const axios = require('axios');
+//const dog = require( "./dogImageGenerator.js" )
 
-//only deploy when breedCount() is commented out so it does not appear on site
-const dog = require( "./dogImageGenerator.js" )
-
-//const axios = require('axios');
 module.exports.execute = async (event, context, callback) => {
-  //var imageURL = await getRandomImageOfSubBreed(event.a);
+  //I can use this to test locally using --data with subbreed of choice but
+  //I can not get it to deploy
+  let image = await getRandomImageOfSubBreed(event.subbreed);
   const response = {
     statusCode: 200,
-    body: dog(),
+    // I want it to print the ouptut of getRandomImageOfSubBreed
+    body: console.log(image),
   };
   callback(null, response);
 };
-
 
 
 
