@@ -1,14 +1,21 @@
 'use strict';
-const dog = require('./getRandomImageOfSubBreed(hound-basset)')
-//const dictionary = require("./dictionary")
 const axios = require('axios');
-module.exports.execute = (event, context, callback) => {
+
+//only deploy when breedCount() is commented out so it does not appear on site
+const dog = require( "./dogImageGenerator.js" )
+
+//const axios = require('axios');
+module.exports.execute = async (event, context, callback) => {
+  //var imageURL = await getRandomImageOfSubBreed(event.a);
   const response = {
     statusCode: 200,
     body: dog(),
   };
-callback(null, response);
+  callback(null, response);
 };
+
+
+
 
 async function getRandomImageOfSubBreed(subBreed) {
   const response = await axios.get('https://dog.ceo/api/breeds/list/all');
